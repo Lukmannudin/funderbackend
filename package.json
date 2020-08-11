@@ -1,0 +1,22 @@
+{
+  "name": "funderbackend",
+  "version": "1.0.0",
+  "description": "Sebagai Backend Dari Aplikasi Funder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lukmannudin/funderbackend.git"
+  },
+  "author": "Lukmannudin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lukmannudin/funderbackend/issues"
+  },
+  "homepage": "https://github.com/Lukmannudin/funderbackend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
