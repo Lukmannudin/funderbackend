@@ -1,6 +1,10 @@
-var { models } = require('../sequelize');
-const bycrypt = require('bcrypt');
+const { Op } = require("sequelize");
+
+const bcrypt = require('bcrypt');
+
 const saltRounds = 10;
+
+var { models} = require('../sequelize');
 
 class EventOrganizer {
     async getAllUser(){
@@ -8,24 +12,27 @@ class EventOrganizer {
     }
 
     createPassword(params) {
-        bycrypt.genSalt(saltRounds, function(err, salt){
-            bycrypt.hash(myPlainTextPassword, salt, function(err, hash){
+        bcrypt.genSalt(saltRounds, function(err, salt){
+            bcrypt.hash("admin", salt, function(err, hash){
                 console.log("hash: "+hash);
             })
         })    
     }
 
-    checkPassword(email, password){
-        let user = models.EventOrganizer.user_eos.findAll({
+    async checkPassword(username, password){
+        
+        let user = await models.user_eos.findOne({
             where: {
-                
+                [Op.or]: [{ name: username }, { email: username }],  
             }
-        })
+        });
 
-        bycrypt.compare(password, "$2b$10$aohWb27U.cllVBlPqod4XuZ/pVeoFL288J4/in7D7IxXsClBf6XeO", function(err,result){
-            if (err) throw err;
-            console.log("Ternyata: "+result)
-        })
+        if (bcrypt.compareSync(password, user.password)){
+            return user;
+        } else {
+            return false;
+        }
+       
     }
 }
 
