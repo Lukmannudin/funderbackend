@@ -33,7 +33,8 @@ router.get("/login", function(req, res, next){
 
     res.json(data)
 
-  }).catch(function () {
+  }).catch(function (err) {
+      console.log(err);
       console.log("Promise Rejected");
   })
 });

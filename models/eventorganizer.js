@@ -1,17 +1,18 @@
 const { Op } = require("sequelize");
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const saltRounds = 10;
 
 var { models} = require('../sequelize');
 
 class EventOrganizer {
+
     async getAllUser(){
         return await models.user_eos.findAll();
     }
 
-    createPassword(params) {
+    createPassword(  ) {
         bcrypt.genSalt(saltRounds, function(err, salt){
             bcrypt.hash("admin", salt, function(err, hash){
                 console.log("hash: "+hash);
