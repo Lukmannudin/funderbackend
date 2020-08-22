@@ -18,7 +18,7 @@ async function showAllEo(req,res){
   res.status(200).json(users);
 }
 
-router.get("/login", function(req, res, next){
+router.post("/login", function(req, res, next){
   let user = eo.checkPassword(req.body.username, req.body.password);
   
   user.then(function (result) {
